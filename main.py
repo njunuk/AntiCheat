@@ -5,6 +5,7 @@ from datetime import datetime
 import time
 import os
 import threading
+import tempfile, base64, zlib
 
 WRIST_T = 0.85  # Wrist confidence threshold
 
@@ -179,6 +180,9 @@ def UATranslate():
 # -------------------------------------------------------
 # TKINTER UI
 root = Tk()
+# Title and transparent Icon
+root.title("Anti-cheat")
+root.iconbitmap("favicon.ico")
 models = ["n", "s", "m", "l", "x"]
 em = StringVar(value="n")
 
