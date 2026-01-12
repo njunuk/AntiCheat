@@ -5,7 +5,6 @@ from datetime import datetime
 import time
 import os
 import threading
-import tempfile, base64, zlib
 
 WRIST_T = 0.85  # Wrist confidence threshold
 
@@ -240,3 +239,4 @@ Button(ButtonFrame, text="ENG", command=lambda: threading.Thread(target=ENGTrans
 # -------------------------------------------------------
 
 root.mainloop()
+
