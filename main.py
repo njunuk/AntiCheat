@@ -5,6 +5,7 @@ from datetime import datetime
 import time
 import os
 import threading
+from PIL import Image, ImageTk
 
 WRIST_T = 0.85  # Wrist confidence threshold
 
@@ -158,7 +159,7 @@ def start():
 def ENGTranslate():
     Lab1.config(text="Choose YOLO model (n/s/m/l/x)")
     Lab2.config(text="Enter camera index (0/1/2)")
-    Lab3.config(text="Detection confidence required")
+    Lab3.config(text="Minimum detection confidence required")
     Lab4.config(text="Cooldown seconds between snapshots")
     Lab5.config(text="Frames required for phone snapshot")
     Lab6.config(text="Seconds required for hidden hands snapshot")
@@ -175,12 +176,21 @@ def UATranslate():
     hdcb.config(text="Детекція рук")
     StrtBtn.config(text="Старт")
 
+def openTutorial():
+    tutorial = Toplevel(root)
+    tutorial.title("Anti-Cheat Guide")
+    tutorial.iconbitmap("favicon.ico")
+    img = Image.open("AntiCheatGuide.png")
+    photo = ImageTk.PhotoImage(img)
+    label = Label(tutorial, image=photo)
+    label.image = photo
+    label.pack(expand=True)
 
 # -------------------------------------------------------
 # TKINTER UI
 root = Tk()
-# Title and transparent Icon
-root.title("Anti-cheat")
+# Title and icon
+root.title("Anti-Cheat")
 root.iconbitmap("favicon.ico")
 models = ["n", "s", "m", "l", "x"]
 em = StringVar(value="n")
@@ -196,7 +206,7 @@ evvar.set(0)
 ev = Entry(root, textvariable=evvar)
 ev.grid(row=1, column=1, padx=5)
 
-Lab3 =Label(root, text="Detection confidence required")
+Lab3 =Label(root, text="Minimum detection confidence required")
 Lab3.grid(row=2, column=0, padx=5)
 dcvar = DoubleVar()
 dcvar.set(0.35)
@@ -238,5 +248,7 @@ Button(ButtonFrame, text="UA", command=lambda: threading.Thread(target=UATransla
 Button(ButtonFrame, text="ENG", command=lambda: threading.Thread(target=ENGTranslate).start()).grid(row=0, column=1, padx=5)
 # -------------------------------------------------------
 
+openTutorial()
 root.mainloop()
+
 
